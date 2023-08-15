@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'login.dart';
+import 'package:test_app/model/cardinfo.dart';
+import 'package:test_app/widgets/card.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -10,169 +10,84 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  List<cardinfo> cardData = [
+    const cardinfo(
+        image: 'assets/plane.webp',
+        message: 'Make Your booking\n with Flexify and enjoy',
+        title: 'Tickets'),
+    const cardinfo(
+        image: 'assets/hotel.jpeg',
+        message: 'The Ideal Hotel at a \nGreat Price',
+        title: 'Hotels'),
+    const cardinfo(
+        image: 'assets/hill.jpeg',
+        message: 'Find & book tours,\n adventures, activities',
+        title: 'Adventure'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/background.avif'),
-                      fit: BoxFit.cover)),
-              height: 400,
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/background.avif"),
+                fit: BoxFit.cover)),
+        child: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 60,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    height: 20,
+                  RichText(
+                    text: const TextSpan(
+                        text: "Michael\n",
+                        style: TextStyle(fontSize: 36, color: Colors.black),
+                        children: [
+                          TextSpan(
+                              text: "Alexander",
+                              style: TextStyle(fontWeight: FontWeight.w800))
+                        ]),
                   ),
-                  Center(
-                      child: Text(
-                    "Welcome to Maxlearn✨",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800),
-                  )),
-                  SizedBox(
-                    height: 200,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text(
-                      "Let's Upgrade your \nlearning experience",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w800),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: Text(
-                      '''Changing the way people learn by providing 
-an interactive, engaging and personalised learning''',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                    ),
+                  const CircleAvatar(
+                    backgroundImage: AssetImage("assets/avatar.jpeg"),
+                    radius: 30,
                   )
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoginScreen()));
-                },
-                child: Container(
-                  height: 55,
-                  color: Colors.lime[400],
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.phone_iphone_outlined,
-                        size: 20,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "Continue with Number",
-                        style: TextStyle(color: Colors.black, fontSize: 22),
-                      )
-                    ],
+              const SizedBox(
+                height: 40,
+              ),
+              const Text(
+                  "We focus a lot on helping the first time or inexperienced traveler head out",
+                  style: TextStyle(fontSize: 18, color: Colors.white)),
+              const SizedBox(
+                height: 40,
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Expanded(
+                flex: 5,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: card(
+                      cardData: cardData[index],
+                    ),
                   ),
+                  itemCount: cardData.length,
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Center(
-              child: Text(
-                "Or login with",
-                style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.grey)),
-                  height: 55,
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(children: [
-                      Image(
-                        image: AssetImage('assets/google.png'),
-                        height: 25,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text("Google")
-                    ]),
-                  ),
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
-                Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.grey)),
-                  height: 55,
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(children: [
-                      Image(
-                        image: AssetImage('assets/facebook.avif'),
-                        height: 35,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text("Facebook")
-                    ]),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account? "),
-                  Text(
-                    "Register",
-                    style: TextStyle(color: Colors.lime[800]),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+            ],
+          ),
+        )),
       ),
     );
   }

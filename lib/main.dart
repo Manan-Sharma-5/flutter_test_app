@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       title: 'GDSC Test App',
       theme: ThemeData(),
       home: const Scaffold(
-        backgroundColor: Colors.white,
         body: WelcomeScreen(),
       ),
     );
